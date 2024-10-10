@@ -4,12 +4,12 @@ import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
 import { Loader } from "lucide-react";
-/* import { useAction, useMutation } from "convex/react";
-import { api } from "@/convex/_generated/api"; */
-/* import { v4 as uuidv4 } from 'uuid'; */
-/* import { useToast } from "@/components/ui/use-toast"
+import { useAction, useMutation } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import { v4 as uuidv4 } from "uuid";
+import { useToast } from "@/hooks/use-toast"
 
-import { useUploadFiles } from '@xixixao/uploadstuff/react'; */
+import { useUploadFiles } from "@xixixao/uploadstuff/react";
 
 const useGeneratePodcast = ({
   setAudio,
@@ -18,14 +18,14 @@ const useGeneratePodcast = ({
   setAudioStorageId,
 }: GeneratePodcastProps) => {
   const [isGenerating, setIsGenerating] = useState(false);
-  /* const { toast } = useToast() */
+  const { toast } = useToast();
 
-  /* const generateUploadUrl = useMutation(api.files.generateUploadUrl);
-  const { startUpload } = useUploadFiles(generateUploadUrl)
+  const generateUploadUrl = useMutation(api.files.generateUploadUrl);
+  const { startUpload } = useUploadFiles(generateUploadUrl);
 
-  const getPodcastAudio = useAction(api.openai.generateAudioAction)
+  const getPodcastAudio = useAction(api.openai.generateAudioAction);
 
-  const getAudioUrl = useMutation(api.podcasts.getUrl); */
+  const getAudioUrl = useMutation(api.podcasts.getUrl);
 
   const generatePodcast = async () => {
     setIsGenerating(false);

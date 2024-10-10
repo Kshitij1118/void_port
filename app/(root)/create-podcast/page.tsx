@@ -28,6 +28,8 @@ import GenerateThumbnail from "@/components/GenerateThumbnail";
 import GeneratePodcast from "@/components/GeneratePodcast";
 import { Button } from "@/components/ui/button";
 import { Loader } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { useRouter } from "next/router";
 
 const voiceCategories = ["alloy", "shimmer", "nova", "echo", "fable", "onyx"];
 
@@ -37,7 +39,7 @@ const formSchema = z.object({
 });
 
 const CreatePodcast = () => {
-  /* const router = useRouter(); */
+  const router = useRouter();
   const [imagePrompt, setImagePrompt] = useState("");
   const [imageStorageId, setImageStorageId] = useState<Id<"_storage"> | null>(
     null
@@ -55,9 +57,9 @@ const CreatePodcast = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  /* const createPodcast = useMutation(api.podcasts.createPodcast); */
+  const createPodcast = useMutation(api.podcasts.createPodcast);
 
-  /* const { toast } = useToast() */
+  const { toast } = useToast()
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -73,7 +75,7 @@ const CreatePodcast = () => {
     console.log(values);
   }
 
-  /* async function onSubmit(data: z.infer<typeof formSchema>) {
+  async function onSubmit(data: z.infer<typeof formSchema>) {
     try {
       setIsSubmitting(true);
       if (!audioUrl || !imageUrl || !voiceType) {
@@ -108,7 +110,7 @@ const CreatePodcast = () => {
       });
       setIsSubmitting(false);
     }
-  } */
+  }
 
   return (
     <section className="mt-410 flex flex-col">
@@ -201,7 +203,7 @@ const CreatePodcast = () => {
             />
           </div>
           <div className="flex flex-col pt-10">
-            {/* <GeneratePodcast
+            <GeneratePodcast
               setAudioStorageId={setAudioStorageId}
               setAudio={setAudioUrl}
               voiceType={voiceType!}
@@ -211,7 +213,7 @@ const CreatePodcast = () => {
               setAudioDuration={setAudioDuration}
             />
 
-            <GenerateThumbnail
+            {/*  <GenerateThumbnail
               setImage={setImageUrl}
               setImageStorageId={setImageStorageId}
               image={imageUrl}
