@@ -7,7 +7,7 @@ import { Loader } from "lucide-react";
 import { useAction, useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { v4 as uuidv4 } from "uuid";
-import { useToast } from "@/hooks/use-toast"
+import { useToast } from "@/hooks/use-toast";
 
 import { useUploadFiles } from "@xixixao/uploadstuff/react";
 
@@ -37,13 +37,11 @@ const useGeneratePodcast = ({
       });
       return setIsGenerating(false);
     }
-
     try {
       const response = await getPodcastAudio({
         voice: voiceType,
         input: voicePrompt,
       });
-
       const blob = new Blob([response], { type: "audio/mpeg" });
       const fileName = `podcast-${uuidv4()}.mp3`;
       const file = new File([blob], fileName, { type: "audio/mpeg" });
