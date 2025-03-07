@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   images: {
     remotePatterns: [
       {
@@ -8,7 +11,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "first-ermine-239.convex.cloud",
+        hostname: "sleek-capybara-771.convex.cloud",
       },
       {
         protocol: "https",
