@@ -11,15 +11,25 @@ const openai = new OpenAI({
 export const generateAudioAction = action({
   args: { input: v.string(), voice: v.string() },
   handler: async (_, { voice, input }) => {
-    const mp3 = await openai.audio.speech.create({
-      model: "tts-1",
-      voice: voice as SpeechCreateParams["voice"],
-      input,
-    });
+    try {
+      const mp3 = await openai.audio.speech.create({
+        model: "tts-1",
+        voice: voice as SpeechCreateParams["voice"],
+        input,
+      });
 
-    const buffer = await mp3.arrayBuffer();
+      const buffer = await mp3.arrayBuffer();
 
-    return buffer;
+      return buffer;
+    } catch (error: any) {
+      console.log("OpenAI error:", error);
+
+      if (error.status === 429) {
+        throw new Error("Rate limit exceeded");
+      } else {
+        throw new Error(`Error generating thumbnail: ${error.message}`);
+      }
+    }
   },
 });
 
