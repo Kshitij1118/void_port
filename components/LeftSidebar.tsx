@@ -1,6 +1,6 @@
 'use client';
 
-import { sidebarLinks } from '@/constants'
+import { sidebarLinks } from "@/convex/constants";
 import { cn } from '@/lib/utils'
 import { SignedIn, SignedOut, useClerk } from '@clerk/nextjs';
 import Image from 'next/image'
